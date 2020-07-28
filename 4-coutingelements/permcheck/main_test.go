@@ -1,9 +1,9 @@
 package permcheck
 
 import (
+	"github.com/magiconair/properties/assert"
 	"testing"
 
-	"github.com/magiconair/properties/assert"
 )
 
 // TestPermCheck tests PermCheck function

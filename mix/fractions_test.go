@@ -2,8 +2,6 @@ package mix
 
 import (
 	"testing"
-
-	"github.com/magiconair/properties/assert"
 )
 
 // TestFractions tests Fractions function
