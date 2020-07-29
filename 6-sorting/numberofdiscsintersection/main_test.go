@@ -1,8 +1,9 @@
 package numberofdiscsintersection
 
 import (
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 // TestNumberOfDiscIntersections tests NumberOfDiscIntersections function
@@ -12,8 +13,7 @@ func TestNumberOfDiscIntersections(t *testing.T) {
 		a           []int
 		expectedRes int
 	}{
-		{description: "nominal case", a: []int{2, 2, 1, 2, 3, 1}, expectedRes: 3},
-		{description: "nominal case", a: []int{2}, expectedRes: 1},
+		{description: "nominal case", a: []int{1, 5, 2, 1, 4, 0}, expectedRes: 11 },
 	}
 
 	for _, tc := range tt {
@@ -23,5 +23,3 @@ func TestNumberOfDiscIntersections(t *testing.T) {
 		})
 	}
 }
-
-
