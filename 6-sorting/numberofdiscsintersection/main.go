@@ -1,9 +1,10 @@
 package numberofdiscsintersection
 
 import (
-	"fmt"
 	"sort"
 )
+
+var maxIntersects = 10000000
 
 // NumberOfDiscIntersections returns the number of disc intersections
 func NumberOfDiscIntersections(A []int) int {
@@ -14,24 +15,30 @@ func NumberOfDiscIntersections(A []int) int {
 		start[i] = i - A[i]
 		end[i] = A[i] + i
 	}
-	fmt.Printf("start: %v, end: %v \n", start, end)
 	// sort arrays, we do not manipulate disks but values on segments
 	sort.Ints(start)
 	sort.Ints(end)
-	fmt.Printf("start sorted: %v, end sorted: %v \n", start, end)
 
-	var position, intersections, activeDisks int
-	for i := range start {
-		if start[i] > end[position] {
+	// loop until the start values are all treated
+	// increment whether end index or start index
+	var idxStart, idxEnd, intersections, activeDisks int
+	for idxStart < len(start) {
+		// We treat the current start value, we close one disk and pass to the next value of end array.
+		if start[idxStart] > end[idxEnd] {
 			activeDisks--
-			position++
+			idxEnd++
 		}
-		if start[i] <= end[position] {
+		// The current disk intersects all the active ones, there is a new active disks and we can treat the next start value.
+		if start[idxStart] <= end[idxEnd] {
 			intersections += activeDisks
+			// early exit if the max intersections is reached
+			if intersections > maxIntersects {
+				return -1
+			}
 			activeDisks++
-			fmt.Println(i, activeDisks, intersections)
+			idxStart++
 		}
-		fmt.Printf("i: %v, position: %v, activeDisks: %v, intersections: %v \n", i, position, activeDisks, intersections)
 	}
+
 	return intersections
 }
