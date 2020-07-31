@@ -13,7 +13,7 @@ func TestNumberOfDiscIntersections(t *testing.T) {
 		a           []int
 		expectedRes int
 	}{
-		{description: "nominal case", a: []int{1, 5, 2, 1, 4, 0}, expectedRes: 11 },
+		{description: "nominal case", a: []int{1, 5, 2, 1, 4, 0}, expectedRes: 11},
 	}
 
 	for _, tc := range tt {

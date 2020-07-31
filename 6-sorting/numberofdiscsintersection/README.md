@@ -1,4 +1,4 @@
-# Number of discs intersection
+# Number of discs intersections
 
 
 

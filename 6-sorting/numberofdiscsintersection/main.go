@@ -14,19 +14,24 @@ func NumberOfDiscIntersections(A []int) int {
 		start[i] = i - A[i]
 		end[i] = A[i] + i
 	}
+	fmt.Printf("start: %v, end: %v \n", start, end)
 	// sort arrays, we do not manipulate disks but values on segments
-	fmt.Println(start, end)
 	sort.Ints(start)
 	sort.Ints(end)
-	fmt.Println(start, end)
+	fmt.Printf("start sorted: %v, end sorted: %v \n", start, end)
 
-	var position int
+	var position, intersections, activeDisks int
 	for i := range start {
-		// return the index of the start array
-		// start[i] <= end[i]
-		position = sort.SearchInts(end, start[i])
-		fmt.Println(position)
-
+		if start[i] > end[position] {
+			activeDisks--
+			position++
+		}
+		if start[i] <= end[position] {
+			intersections += activeDisks
+			activeDisks++
+			fmt.Println(i, activeDisks, intersections)
+		}
+		fmt.Printf("i: %v, position: %v, activeDisks: %v, intersections: %v \n", i, position, activeDisks, intersections)
 	}
-	return 0
+	return intersections
 }
