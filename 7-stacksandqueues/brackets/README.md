@@ -27,5 +27,5 @@ Copyright 2009–2020 by Codility Limited. All Rights Reserved. Unauthorized cop
 
 ## Complexity
 
-Time:
-Space:
+Time: O(n)
+Space: O(n)

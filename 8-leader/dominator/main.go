@@ -1,0 +1,7 @@
+package dominator
+
+func Dominator() {
+
+}
+
+

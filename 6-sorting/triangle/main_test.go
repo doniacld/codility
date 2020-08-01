@@ -6,8 +6,8 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-// TestNumberOfDiscIntersections tests NumberOfDiscIntersections function
-func TestNumberOfDiscIntersections(t *testing.T) {
+// TestTriangle tests Triangle function
+func TestTriangle(t *testing.T) {
 	tt := []struct {
 		description string
 		a           []int
