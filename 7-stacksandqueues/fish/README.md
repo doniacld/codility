@@ -44,5 +44,5 @@ Copyright 2009–2020 by Codility Limited. All Rights Reserved. Unauthorized cop
 
 ## Complexity
 
-- TIme:
-- Complexity: 
+- TIme: O(n)
+- Complexity: O(n)
