@@ -5,22 +5,26 @@ import (
 	"strings"
 )
 
-//  n! , (n-1)!,..., 1 en O(n)
+// Factorials print this: n! , (n-1)!,..., 1
+// Time complexity O(n)
 func Factorials(n int) string {
-	var result []int
-	for i := 1; i < n+1; i++ {
-		result = append(result, factorial(i))
+	if n == 0 {
+		return ""
 	}
-	reverseResult := reverseSlice(result)
-	res := strings.Join(reverseResult, ", ")
-	return res
+	a := make([]int, 0)
+	_, a = factorial(n, a)
+	res := reverseSlice(a)
+	return strings.Join(res, ", ")
 }
 
-func factorial(n int) int {
+func factorial(n int, a []int) (int, []int) {
+	var res int
 	if n == 0 {
-		return 1
+		return 1, a
 	} else {
-		return n * factorial(n-1)
+		res, a = factorial(n-1, a)
+		a = append(a, res*n)
+		return res * n, a
 	}
 }
 
