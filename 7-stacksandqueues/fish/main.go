@@ -2,7 +2,7 @@ package fish
 
 // Fish returns the number of fishes that are alive,
 // if a downstream fish is encountered, we add it to the stack,
-// if an upstream fish is encoutered, let's compare its size to all downstream fishes,
+// if an upstream fish is encountered, let's compare its size to all downstream fishes,
 // in the case of the upstream fish is bigger than the the downstream, let's update the stack.
 func Fish(A, B []int) int {
 

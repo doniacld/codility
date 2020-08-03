@@ -1,8 +1,9 @@
 package brackets
 
 import (
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 // TestBrackets tests Brackets function
