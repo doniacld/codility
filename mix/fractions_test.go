@@ -2,6 +2,8 @@ package mix
 
 import (
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 // TestFractions tests Fractions function
