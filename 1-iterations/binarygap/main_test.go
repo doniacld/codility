@@ -21,7 +21,7 @@ func TestRetrieveGapBinary(t *testing.T) {
 		{"only one gap with several ones at the beginning", 483, 3}, // 111100011
 		{"max gap is the second gap", 647, 4},                       // 1010000111
 		{"max gap is the second gap", 10564, 3},                     // 10100101000100
-		{"max gap is the second gap", 32, 0},                        // 10100101000100
+		{"there is not gap", 32, 0},                        // 10100101000100
 	}
 
 	for _, tc := range tt {

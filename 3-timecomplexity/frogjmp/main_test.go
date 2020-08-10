@@ -18,6 +18,8 @@ func TestFrogJmp(t *testing.T) {
 	}{
 		{"nominal case", 10, 85, 30, 3},
 		{"nominal case", 10, 85, 8, 10},
+		{"invalid case: step is equal to 0", 10, 85, 0, -1},
+		{"invalid case: step is negative", 10, 85, -42, -1},
 	}
 
 	for _, tc := range tt {

@@ -1,4 +1,4 @@
-
+# Frog jump
 
 A small frog wants to get to the other side of the road. The frog is currently located at position X and wants to get to a position greater than or equal to Y. The small frog always jumps a fixed distance, D.
 
@@ -27,3 +27,8 @@ Write an efficient algorithm for the following assumptions:
         X ≤ Y.
 
 Copyright 2009–2020 by Codility Limited. All Rights Reserved. Unauthorized copying, publication or disclosure prohibited. 
+
+## Complexity
+
+- time: O(1)
+- space: O(1)

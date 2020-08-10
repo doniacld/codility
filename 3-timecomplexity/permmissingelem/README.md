@@ -1,6 +1,4 @@
-# perm missing element
-
-
+# Perm missing element
 
 An array A consisting of N different integers is given. the array contains integers in the range [1..(n + 1)], which means that exactly one element is missing.
 Your goal is to find that missing element.
@@ -26,3 +24,8 @@ write an efficient algorithm for the following assumptions:
         each element of array a is an integer within the range [1..(n + 1)].
 
 copyright 2009–2020 by codility limited. all rights reserved. unauthorized copying, publication or disclosure prohibited. 
+
+## Complexity
+
+- time: O(n)
+- space: O(1)

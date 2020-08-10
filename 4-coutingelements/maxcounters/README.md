@@ -1,7 +1,5 @@
 # Max counters
 
-
-
 You are given N counters, initially set to 0, and you have two possible operations on them:
 
         increase(X) − counter X is increased by 1,
@@ -58,4 +56,5 @@ Write an efficient algorithm for the following assumptions:
 
 Copyright 2009–2020 by Codility Limited. All Rights Reserved. Unauthorized copying, publication or disclosure prohibited. 
 
-* Complxity `O(N+M)`
+- time: O(n+m)
+- space: O(n)

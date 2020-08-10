@@ -44,3 +44,8 @@ Write an efficient algorithm for the following assumptions:
         each element of array A is an integer within the range [1..X].
 
 Copyright 2009–2020 by Codility Limited. All Rights Reserved. Unauthorized copying, publication or disclosure prohibited. 
+
+## Complexity
+
+- time: O(n)
+- space: O(1)

@@ -25,9 +25,11 @@ func TestOddOccurencesInArray(t *testing.T) {
 	}
 }
 
-// TestIsOdd
+// TestIsOdd tests isOdd method
 func TestIsOdd(t *testing.T) {
-
 	res := isOdd(5)
 	assert.Equal(t, true, res)
+	res = isOdd(4)
+	assert.Equal(t, false, res)
+
 }
