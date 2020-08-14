@@ -8,8 +8,10 @@ const (
 	openBracket  = "("
 )
 
+// Nesting returns 1 if the brackets are welled nested otherwise returns 0
 func Nesting(S string) int {
 	if len(S)%2 != 0 {
+		// early exit due to odd length
 		return 0
 	}
 
@@ -17,10 +19,11 @@ func Nesting(S string) int {
 
 	stack := make([]string, 0)
 	for _, value := range s {
+		isOpenBracket := value == openBracket
 		switch {
-		case isOpenBracket(value):
+		case isOpenBracket:
 			stack = append(stack, value)
-		case len(stack) > 0 && !isOpenBracket(value):
+		case len(stack) > 0 && !isOpenBracket:
 			stack = stack[:len(stack)-1]
 		default:
 			return 0
@@ -32,8 +35,4 @@ func Nesting(S string) int {
 	} else {
 		return 1
 	}
-}
-
-func isOpenBracket(value string) bool {
-	return value == openBracket
 }

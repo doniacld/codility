@@ -4,6 +4,9 @@ package maxcounters
 // if A[K] = X, such that 1 ≤ X ≤ N, then operation K is increase(X),
 // if A[K] = N + 1 then operation K is max counter.
 func MaxCounters(N int, A []int) []int {
+	if N == 0 || len(A) < 0 {
+		return []int{}
+	}
 	counters := make([]int, N)
 	var currentMaxCounter, floorCounter int
 

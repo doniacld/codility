@@ -6,6 +6,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+// TestStoneWall tests StoneWall method
 func TestStoneWall(t *testing.T) {
 	tt := []struct {
 		description    string

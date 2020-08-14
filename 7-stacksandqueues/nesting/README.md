@@ -1,7 +1,5 @@
 # Nesting
 
-
-
 A string S consisting of N characters is called properly nested if:
 
         S is empty;
@@ -27,5 +25,5 @@ Copyright 2009–2020 by Codility Limited. All Rights Reserved. Unauthorized cop
 
 ## Complexity
 
-Time: O(n)
-Space: O(n)
+- Time: O(n)
+- Space: O(n)

@@ -14,7 +14,7 @@ func TestDistinct(t *testing.T) {
 		expectedRes int
 	}{
 		{description: "nominal case", a: []int{2, 2, 1, 2, 3, 1}, expectedRes: 3},
-		{description: "nominal case", a: []int{2}, expectedRes: 1},
+		{description: "nominal case: only one value", a: []int{2}, expectedRes: 1},
 	}
 
 	for _, tc := range tt {

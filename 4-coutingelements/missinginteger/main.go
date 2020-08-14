@@ -1,6 +1,6 @@
 package missinginteger
 
-// MissingInteger returns the smallest positive integer that does not occur
+// MissingInteger returns the smallest positive integer that does not occur in a given array
 func MissingInteger(A []int) int {
 	seen := make(map[int]bool)
 	// fill the map with present values

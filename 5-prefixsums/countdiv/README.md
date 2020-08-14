@@ -20,5 +20,5 @@ Copyright 2009–2020 by Codility Limited. All Rights Reserved. Unauthorized cop
 
 ## Complexity
 
-* expected worst-case time complexity is O(1)  
-* expected worst-case space complexity is O(1)
+* time: O(1)  
+* space: O(1)

@@ -6,7 +6,7 @@ import (
 	"github.com/magiconair/properties/assert"
 )
 
-// GenomicRangeQuery returns
+// TestGenomicRangeQuery tests GenomicRangeQuery method
 func TestGenomicRangeQuery(t *testing.T) {
 	tt := []struct {
 		description string

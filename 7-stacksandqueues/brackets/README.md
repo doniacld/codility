@@ -1,7 +1,5 @@
 # Brackets
 
-
-
 A string S consisting of N characters is considered to be properly nested if any of the following conditions is true:
 
         S is empty;
@@ -27,5 +25,5 @@ Copyright 2009–2020 by Codility Limited. All Rights Reserved. Unauthorized cop
 
 ## Complexity
 
-Time: O(n)
-Space: O(n)
+- Time: O(n)
+- Space: O(n)

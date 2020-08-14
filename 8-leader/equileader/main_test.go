@@ -1,8 +1,9 @@
 package equileader
 
 import (
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 // TestEquileader tests Equileader function
