@@ -12,9 +12,11 @@ import (
 func CountNumberWords(file string) int {
 
 	// open a file
-
+	// data, err := ioutil.ReadFile(file)
+	// check error
+	// s := string(data)
 	// store the file in a string
-	fileString := "I am the one blabla. Coucou! titi ? toto? bibi ! Caca ."
+	fileString := "I am the one blabla. Coucou! titi ? toto? bibi ! Caca  ."
 	f := strings.Split(fileString, ".")
 	f = strings.Split(strings.Join(f, " "), "!")
 	f = strings.Split(strings.Join(f, " "), ".")

@@ -2,172 +2,122 @@ package main
 
 import "fmt"
 
-// https://medium.com/@fazlulkabir94/lru-cache-golang-implementation-92b7bafb76f0
-
-// LRUCache holds the cache information
+// LRUCache
 type LRUCache struct {
 	capacity int
 	size     int
-	pageList Queue
-	pageMap  map[int]*Qnode
+	head     *Node
+	tail     *Node
+	mapPage  map[int]*Node
 }
 
-// Queue holds information about a queue
-type Queue struct {
-	front *Qnode
-	rear  *Qnode
-}
-
-// Qnode holds information about a node in a queue
-type Qnode struct {
+type Node struct {
 	key   int
 	value int
-	prev  *Qnode
-	next  *Qnode
+	prev  *Node
+	next  *Node
 }
 
-// addQnode creates a node with the given values
-func addQnode(key int, value int) *Qnode {
-	return &Qnode{
-		key:   key,
-		value: value,
-		prev:  nil,
-		next:  nil,
-	}
-}
-
-// isEmpty returns true if the queue is empty
-func (q *Queue) isEmpty() bool {
-	return q.rear == nil
-}
-
-// addFrontPage add a new page to the front of the queue
-func (q *Queue) addFrontPage(key int, value int) *Qnode {
-	page := addQnode(key, value)
-
-	// queue is empty
-	if q.front == nil && q.rear == nil {
-		q.front = page
-		q.rear = page
-	} else {
-		// Otherwise, we move the current front to the next one
-		// and put at the front the added page.
-		page.next = q.front
-		q.front.prev = page
-		q.front = page
-	}
-	return page
-}
-
-// moveToFront moves to the front an existing page
-func (q *Queue) moveToFront(page *Qnode) {
-	if page == q.front {
-		// we do nothing
-		return
-	}
-	// given page is at the end of the queue
-	if page == q.rear {
-		q.rear = q.rear.prev
-		q.rear.next = nil
-	} else {
-		page.prev.next = page.next
-		page.next.prev = page.prev
-	}
-
-	// put the page to the front of the queue
-	page.next = q.front
-	q.front.prev = page
-	q.front = page
-}
-
-// removeRear removes the rear from the queue
-func (q *Queue) removeRear() {
-	if q.isEmpty() {
-		return
-	}
-	// if front and rear are equals, let's just set them to 0
-	if q.front == q.rear {
-		q.front = nil
-		q.rear = nil
-	} else {
-		// case they are not equal
-		// the current rear is set to the previous one and the next one is nil
-		q.rear = q.rear.prev
-		q.rear.next = nil
-	}
-}
-
-// getRear returns the given rear
-func (q *Queue) getRear() *Qnode {
-	return q.rear
-}
-
-// Constructor initializes the LRUCache with the given capacity
+// Constructor initializes the LRUCache object with the provided capacity
 func Constructor(capacity int) LRUCache {
 	return LRUCache{
 		capacity: capacity,
-		pageMap:  make(map[int]*Qnode),
+		mapPage:  make(map[int]*Node),
 	}
 }
 
-// Get returns the value corresponding to the given key
-// if not found, return -1
-// else move the page to the front and return the value
-func (lru *LRUCache) Get(key int) int {
-	if _, found := lru.pageMap[key]; !found {
-		// the value is not found
+func moveToEnd(cache *LRUCache, node *Node) {
+	// already at tail
+	if node == cache.tail {
+		return
+	}
+
+	oldPrev := node.prev
+	oldNext := node.next
+
+	// case node is the head
+	if node == cache.head {
+		// remove from head of chain
+		cache.head = oldNext
+		oldNext.prev = nil
+	} else {
+		// remove from middle of chain
+		oldPrev.next = oldNext
+		oldNext.prev = oldPrev
+	}
+
+	// add at the end
+	oldTail := cache.tail
+	oldTail.next = node
+
+	cache.tail = node
+	node.prev = oldTail
+	node.next = nil
+}
+
+// Get returns the value of a key
+// and updates the head
+func (cache *LRUCache) Get(key int) int {
+	if pointer, ok := cache.mapPage[key]; ok {
+		// case found, update to tail
+		moveToEnd(cache, pointer)
+		return pointer.value
+	} else {
+		// not found
 		return -1
 	}
-
-	// retrieve the value
-	val := lru.pageMap[key].value
-	// move to front the given page
-	lru.pageList.moveToFront(lru.pageMap[key])
-
-	return val
 }
 
-// Put inserts a new page in the queue
-func (lru *LRUCache) Put(key int, value int) {
-	if _, found := lru.pageMap[key]; found {
-		// update the key value with the given one
-		lru.pageMap[key].value = value
+func (cache *LRUCache) Put(key, value int) {
+	if pointer, ok := cache.mapPage[key]; ok {
+		// value is found, move it to the end
+		pointer.value = value
+		moveToEnd(cache, pointer)
+	} else {
+		if cache.size < cache.capacity {
+			// increase the size
+			cache.size++
+		} else {
+			// remove the one at the end
+			delete(cache.mapPage, cache.head.key)
+			if cache.head != nil {
+				cache.head.prev = nil
+			}
+		}
+
+	}
+	n := Node{
+		key:   key,
+		value: value,
+		prev:  cache.tail,
+		next:  nil,
+	}
+	cache.mapPage[key] = &n
+
+	// update old tail
+	if cache.tail != nil {
+		cache.tail.next = &n
 	}
 
-	// case the size and the capacity are the same
-	if lru.size == lru.capacity {
-		// retrieve the key of the rear
-		key := lru.pageList.getRear().key
-		// remove the rears
-		lru.pageList.removeRear()
-		// decrease the size and delete the key
-		lru.size--
-		delete(lru.pageMap, key)
-	}
+	cache.tail = &n
 
-	page := lru.pageList.addFrontPage(key, value)
-	fmt.Println(lru.pageMap)
-	lru.size++
-	lru.pageMap[key] = page
+	// update head if needed
+	if cache.head == nil {
+		cache.head = &n
+
+	}
 }
 
 func main() {
 	cache := Constructor(2)
-	cache.Put(2,2) // 2:2
+	cache.Put(2, 2)           // 2:2
 	fmt.Println(cache.Get(2)) // 2
 	fmt.Println(cache.Get(1)) // -1
-	cache.Put(1,1) // 1:1
-	cache.Put(1,5) // 1:5
+	cache.Put(1, 1)           // 1:1
+	cache.Put(1, 5)           // 1:5
 	fmt.Println(cache.Get(1)) // 5
 	fmt.Println(cache.Get(2)) // 2
-	cache.Put(8, 8) // 8
-	fmt.Println(cache.Get(1)) // 5
+	cache.Put(8, 8)           // 8:8
+	fmt.Println(cache.Get(1)) // -1
 	fmt.Println(cache.Get(8)) // 8
 }
-
-/**
- * Your LRUCache object will be instantiated and called as such:
- * obj := Constructor(capacity);
- * param_1 := obj.Get(key);
- * obj.Put(key,value);
- */
