@@ -34,7 +34,7 @@ func coinChange(coins []int, money int) int {
 	for i := 0; i < numCoins; i++ {
 		for j := coins[i]; j <= money; j++ {
 			// use the saved solution
-			dp[j] += dp[j-coins[i]]
+			dp[j] = dp[j] + dp[j-coins[i]]
 		}
 	}
 	return dp[money]
